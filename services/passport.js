@@ -5,6 +5,17 @@ const keys = require('../config/keys');
 
 const User = mongoose.model('users');
 
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id)
+    .then((user) => {
+      done(null, user);
+    });
+});
+
 passport.use(new GoogleStrategy({
   clientID: keys.googleClientID,
   clientSecret: keys.googleClientSecret,
@@ -14,15 +25,15 @@ passport.use(new GoogleStrategy({
   User.findOne({ googleId: profile.id})
     .then((existingUser) => {
       if(existingUser) {
-        return console.log('User with that ID already exists');
-      }
-
-      new User({ googleId: profile.id}).save((err) => {
-        if(err) {
-          return console.log('Error saving User: ', err);
-        }
-    
-        return console.log('User saved successfully');
-      });
+        console.log('User with that ID already exists');
+        done(null, existingUser);
+      } else {
+        new User({ googleId: profile.id})
+        .save()
+        .then(user => {
+          console.log('User created successfully');
+          done(null, user);
+        });
+      } 
     });
 }));
