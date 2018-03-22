@@ -29,7 +29,7 @@ passport.use(new GoogleStrategy({
         console.log('User with that ID already exists');
         done(null, existingUser);
       } else {
-        new User({ googleId: profile.id})
+        new User({ googleId: profile.id, firstName: profile.name.givenName, lastName: profile.name.familyName, email: profile.emails[0].value})
         .save()
         .then(user => {
           console.log('User created successfully');
