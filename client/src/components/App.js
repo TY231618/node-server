@@ -4,15 +4,7 @@ import { connect } from 'react-redux';
 import { fetchUser } from '../actions';
 
 import Header from './Header';
-
-const Landing = () => {
-
-  return (
-    <div>
-      <h2>Landing</h2>
-    </div>
-  )
-};
+import Landing from './Landing';
 
 const SurveyNew = () => {
 
