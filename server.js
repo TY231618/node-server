@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 require('./models/User');
 require('./services/passport');
 const keys = require('./config/keys');
@@ -13,6 +14,7 @@ app.use(cookieSession({
   keys: [keys.cookieKey]
 }));
 
+app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -27,6 +29,7 @@ mongoose.connect(keys.mongoURI, (err) => {
 });
 
 require('./routes/authRoutes')(app);
+require('./routes/billingRoutes')(app);
 
 app.listen(PORT, (err) => {
 
