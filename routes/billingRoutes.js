@@ -6,6 +6,8 @@ module.exports = (app) => {
 
   app.post('/api/stripe', requireLogin, async (req, res) => {
 
+    res.setHeader('content-type', 'application/javascript');
+
     console.log('request in /api/stripe: ===============>', req);
 
     const charge = await stripe.charges.create({
