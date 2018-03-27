@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchUser } from '../actions';
 
 import Header from './Header';
+import Dashboard from './Dashboard';
 import Landing from './Landing';
 
 const SurveyNew = () => {
@@ -11,15 +12,6 @@ const SurveyNew = () => {
   return (
     <div>
       <h2>Survey New</h2>
-    </div>
-  )
-};
-
-const Dashboard = () => {
-
-  return (
-    <div>
-      <h2>Dashboard</h2>
     </div>
   )
 };
