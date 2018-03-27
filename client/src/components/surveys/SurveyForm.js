@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
 import SurveyField from './SurveyField';
 import _ from 'lodash';
+import validateEmails from '../../utils/validateEmails';
 
 const FIELDS = [
-  {label: 'Survey Title', name: 'title', error: 'Please enter a title greater than 3 characters!'},
+  {label: 'Survey Title', name: 'title', error: 'Please enter a survey title!'},
   {label: 'Subject', name: 'subject', error: 'Please enter a subject!'},
   {label: 'Email Body', name: 'body', error: 'Please add some content to your email!'},
-  {label: 'Recipient List', name: 'emails'},
+  {label: 'Recipient List', name: 'emails', error: 'Please provide some email addresses!'},
 ];
 
 class SurveyForm extends React.Component {
@@ -61,6 +62,7 @@ function validate(values) {
   // if(!values.body) {
   //   errors.body = 'Please add some content to your email!'
   // }
+  errors.emails = validateEmails(values.emails || '');
 
   _.each(FIELDS, (field) => {
     if(!values[field.name]) {
