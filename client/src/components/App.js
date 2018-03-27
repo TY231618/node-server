@@ -6,15 +6,7 @@ import { fetchUser } from '../actions';
 import Header from './Header';
 import Dashboard from './Dashboard';
 import Landing from './Landing';
-
-const SurveyNew = () => {
-
-  return (
-    <div>
-      <h2>Survey New</h2>
-    </div>
-  )
-};
+import SurveyNew from './surveys/SurveyNew';
 
 class App extends React.Component {
 
