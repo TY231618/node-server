@@ -15,13 +15,13 @@ class SurveyNew extends React.Component {
   renderContent() {
     if(this.state.showReview) {
       return (
-        <SurveyFormReview />
+        <SurveyFormReview onCancel={ () => this.setState({ showReview: false }) } />
       ) 
     }
 
 
     return (
-      <SurveyForm onSurveySubmit={ () => this.setState({ showReview: true }) }/>
+      <SurveyForm onSurveySubmit={ () => this.setState({ showReview: true }) } />
     )
   }
 
