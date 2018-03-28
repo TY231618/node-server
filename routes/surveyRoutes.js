@@ -1,8 +1,13 @@
+const _ = require('lodash');
+const Path = require('path-parser');
+const { URL } = require('url');
 const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
 const Survey = require('../models/Survey');
 const Mailer = require('../services/Mailer');
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
+
+
 
 module.exports = (app) => {
 
@@ -12,7 +17,28 @@ module.exports = (app) => {
 
   app.post('/api/surveys/webhooks', (req, res) => {
 
-    console.log('WEBHOOKS =======>', req.body);
+    const events = _.map(req.body, (event) => {
+
+      const pathName = new URL(event.url).pathname;
+      const p = new Path('/api/surveys/:surveyId/:choice');
+
+      const match = p.test(pathName);
+
+      if(match) {
+        return {
+          email: event.email,
+          surveyId: match.surveyId,
+          choice: match.choice
+        };
+      }
+
+    });
+
+    const compactEvents = _.compact(events);
+
+    const uniqueEvents = _.uniqBy(compactEvents, 'email', 'surveyId');
+
+    console.log('finally ====>', uniqueEvents);
     res.send({});
   });
 
