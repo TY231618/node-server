@@ -17,28 +17,45 @@ module.exports = (app) => {
 
   app.post('/api/surveys/webhooks', (req, res) => {
 
-    const events = _.map(req.body, (event) => {
+    const p = new Path('/api/surveys/:surveyId/:choice');
 
-      const pathName = new URL(event.url).pathname;
-      const p = new Path('/api/surveys/:surveyId/:choice');
+    const events = _.chain(req.body)
+      .map((event) => {
 
-      const match = p.test(pathName);
+        const match = p.test(new URL(event.url).pathname);
 
-      if(match) {
-        return {
-          email: event.email,
-          surveyId: match.surveyId,
-          choice: match.choice
-        };
-      }
+        if(match) {
+          return {
+            email: event.email,
+            surveyId: match.surveyId,
+            choice: match.choice
+          };
+        }
 
-    });
+      })
+      .compact()
+      .uniqBy('email', 'surveyId')
+      .value();
 
-    const compactEvents = _.compact(events);
+    // const events = _.map(req.body, (event) => {
 
-    const uniqueEvents = _.uniqBy(compactEvents, 'email', 'surveyId');
+    //   const match = p.test(new URL(event.url).pathname);
 
-    console.log('finally ====>', uniqueEvents);
+    //   if(match) {
+    //     return {
+    //       email: event.email,
+    //       surveyId: match.surveyId,
+    //       choice: match.choice
+    //     };
+    //   }
+
+    // });
+
+    // const compactEvents = _.compact(events);
+
+    // const uniqueEvents = _.uniqBy(compactEvents, 'email', 'surveyId');
+
+    console.log('finally ====>', events);
     res.send({});
   });
 
