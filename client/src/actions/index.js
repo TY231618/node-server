@@ -34,6 +34,20 @@ export const submitSurvey = (values, history) => async dispatch => {
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 
+// export const submitSurvey = (values, history) => async dispatch => {
+
+//   try {
+//     const res = await axios.post('/api/surveys', values);
+
+//     history.push('/surveys');
+
+//     dispatch({ type: FETCH_USER, payload: res.data });
+    
+//   } catch (error) {
+//     dispatch({ type: FETCH_USER, payload: error.response });
+//   }
+// };
+
 // export const submitSurvey = (values) => {
 
 //   console.log('submit survey action =======>', values);
