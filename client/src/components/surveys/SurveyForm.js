@@ -31,7 +31,7 @@ class SurveyForm extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={ this.props.handleSubmit((values) => console.log(values)) } >
+        <form onSubmit={ this.props.handleSubmit(() => this.props.onSurveySubmit) } >
           { this.renderFields() }
           <Link to="/surveys" className="red btn-flat white-text">
             Cancel
@@ -51,17 +51,6 @@ function validate(values) {
 
   const errors = {};
 
-  // if(!values.title || values.title < 3) {
-  //   errors.title = 'Please enter a title greater than 3 characters!'
-  // }
-
-  // if(!values.subject) {
-  //   errors.subject = 'Please enter a subject!'
-  // }
-
-  // if(!values.body) {
-  //   errors.body = 'Please add some content to your email!'
-  // }
   errors.emails = validateEmails(values.emails || '');
 
   _.each(FIELDS, (field) => {

@@ -1,14 +1,12 @@
 import React from 'react';
 
-class SurveyFormReview extends React.Component {
+const SurveyFormReview = () => {
 
-  render() {
     return (
-      <form>
-        <input type="text" />
-      </form>
+      <div>
+        <h5>Please check your inputs</h5>
+      </div>
     )
-  }
 }
 
 export default SurveyFormReview;
