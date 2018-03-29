@@ -17,7 +17,7 @@ class Dashboard extends React.Component {
 
     return (
       <div>
-        motherfecking dashboard yo
+        Dashboard!
         { this.renderButton() }
       </div>
       
