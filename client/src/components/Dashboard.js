@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SurveyList from './surveys/SurveyList';
 
 class Dashboard extends React.Component {
 
@@ -17,7 +18,7 @@ class Dashboard extends React.Component {
 
     return (
       <div>
-        Dashboard!
+        <SurveyList />
         { this.renderButton() }
       </div>
       
