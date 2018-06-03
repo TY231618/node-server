@@ -41,16 +41,18 @@ class Header extends React.Component {
   render() {
 
     return (
-      <nav>
-        <div className="nav-wrapper">
-          <Link to={ this.props.auth ? '/surveys' : '/' } className="left brand-logo" style={{ marginLeft: '15px'}}>
-            Email Survey
-          </Link>
-          <ul className="right">
-            { this.renderContent() }
-          </ul>
-        </div>
-      </nav>
+      <div style={{'marginTop': '34px'}}>
+        <nav>
+          <div className="nav-wrapper">
+            <Link to={ this.props.auth ? '/surveys' : '/' } className="left brand-logo" style={{ marginLeft: '15px'}}>
+              Email Survey
+            </Link>
+            <ul className="right">
+              { this.renderContent() }
+            </ul>
+          </div>
+        </nav>
+      </div>
     )
   }
 }
